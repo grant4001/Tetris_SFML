@@ -127,3 +127,37 @@ void TetrisGamePlay::DisplayWindow()
 {
     window.display();
 }
+
+void TetrisGamePlay::CreateTexts()
+{
+    font.loadFromFile("fonts/CinzelDecorative-Black.otf");
+    score_text.setFont(font);
+    score_text.setCharacterSize(24);
+    score_text.setFillColor(Color::Black);
+    score_text.setStyle(sf::Text::Bold);
+    score_text.setPosition(112.f, 400.f);
+    game_over_text.setFont(font);
+    game_over_text.setCharacterSize(28);
+    game_over_text.setFillColor(Color::Red);
+    game_over_text.setStyle(sf::Text::Bold);
+    game_over_text.setString("GAME OVER");
+}
+
+void TetrisGamePlay::DisplayScore()
+{
+    // inside the main loop, between window.clear() and window.display()
+    score_text.setString(std::to_string(score));
+    window.draw(score_text);
+}
+
+void TetrisGamePlay::CalcScore(int rows)
+{
+    if (rows < 4) score += (rows * 100);
+    else score += 800 + ((rows - 4) * 100);
+}
+
+void TetrisGamePlay::LossHandler()
+{
+    game_over_text.setPosition(62.f, 220.f);
+    window.draw(game_over_text);
+}

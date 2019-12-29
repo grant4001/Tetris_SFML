@@ -26,6 +26,10 @@ class TetrisGamePlay
         bool DelayLandingHandler();
         void ClearWindow();
         void DisplayWindow();
+        void CreateTexts();
+        void DisplayScore();
+        void CalcScore(int rows);
+        void LossHandler();
 
     private:
         const string WINDOW_TITLE = "Tetris!";
@@ -45,6 +49,10 @@ class TetrisGamePlay
         Texture tiles, background, frame, frametop;
         Sprite tiles_s, background_s, frame_s, frametop_s;
         Sprite field_s[7];
+        Font font;
+        Text score_text;
+        Text game_over_text;
+        int score = 0;
 };
 
 #endif

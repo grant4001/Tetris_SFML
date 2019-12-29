@@ -15,8 +15,9 @@ class Field
         int (*GetField())[10];
         void FieldLandingHandler(int piece_type, int* x, int* y);
         int DetectFullRow();
-        void DeleteFullRows();
+        int DeleteFullRows();
         int field[20][10] = {0};
+        bool TopRowFilled();
 
     private:
         const int FIELD_HEIGHT = 20;

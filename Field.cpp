@@ -40,8 +40,9 @@ int Field::DetectFullRow()
     return -1;
 }
 
-void Field::DeleteFullRows()
+int Field::DeleteFullRows()
 {
+    int num_full_rows = 0;
     int row = DetectFullRow();
     while (row != -1)
     {
@@ -51,6 +52,14 @@ void Field::DeleteFullRows()
                 field[i][j] = field[i-1][j];
                 field[i-1][j] = 0;
             }
+        num_full_rows++;
         row = DetectFullRow();
     }
+    return num_full_rows;
+}
+
+bool Field::TopRowFilled()
+{
+    for (int i = 0; i < FIELD_WIDTH; i++) if (field[0][i] != 0) return true;
+    return false;
 }

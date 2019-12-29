@@ -17,6 +17,9 @@ int main()
     // Start the game window
     Game.StartWindow();
 
+    // Initialize score
+    Game.CreateTexts();
+
     // Load image textures into sprites
     Game.LoadImages(piece.GetNumFigs());
 
@@ -60,8 +63,8 @@ int main()
         // Inch the piece down
         if (Game.MoveDownTimeStepHandler()) piece.MoveDown();
 
-        // Delete full rows
-        field.DeleteFullRows();
+        // Delete full rows and calc score
+        Game.CalcScore(field.DeleteFullRows());
 
         // Reset settings before next frame
         piece.ResetSettings();
@@ -85,6 +88,12 @@ int main()
 
         // Draw the frametop
         Game.DrawFrameTop();
+
+        // Draw the score
+        Game.DisplayScore();
+
+        // Check if game is lost
+        if (field.TopRowFilled()) Game.LossHandler();
 
         // Display the window
         Game.DisplayWindow();
